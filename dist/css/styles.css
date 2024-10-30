@@ -199,11 +199,15 @@ a {
       -webkit-justify-content: center;
           -ms-flex-pack: center;
               justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
       gap: var(--space--sm);
       width: calc(var(--size--menu-width) - (2 * var(--space--sm)));
       aspect-ratio: 1 / 1;
       color: var(--text--primary);
-      font-size: 0.5rem;
+      font-size: 8px;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       font-weight: 900;
