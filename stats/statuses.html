@@ -227,6 +227,38 @@
     });
 </script>
                     <div class="charts--thread-status charts--breakdown">
+    <h2>pern rpg</h2>
+    <canvas id="sp"></canvas>
+</div>
+<script>
+    fetch(`https://opensheet.elk.sh/${sheetID}/Threads`)
+    .then((response) => response.json())
+    .then((threadData) => {
+        fetch(`https://opensheet.elk.sh/${sheetID}/Sites`)
+        .then((response) => response.json())
+        .then((siteData) => {
+            //set overall variables
+            let siteName = 'pern rpg';
+            let siteObject = siteName !== 'all' ? siteData.filter(item => item.Site === siteName) : siteData;
+            let threadStats = createThreadStats(threadData, siteObject);
+
+            /*Thread Status*/
+            new Chart(document.getElementById('cop'), {
+                type: 'pie',
+                data: {
+                    labels: threadStats[0].status.tags.map(item => item.toUpperCase()),
+                    datasets: [{
+                        data: threadStats[0].status.totals,
+                        backgroundColor: chartColors,
+                        borderWidth: 0
+                    }]
+                },
+                options: chartOptions
+            });
+        });
+    });
+</script>
+                    <div class="charts--thread-status charts--breakdown">
     <h2>project p.e.r.n.</h2>
     <canvas id="pp"></canvas>
 </div>
@@ -244,38 +276,6 @@
 
             /*Thread Status*/
             new Chart(document.getElementById('pp'), {
-                type: 'pie',
-                data: {
-                    labels: threadStats[0].status.tags.map(item => item.toUpperCase()),
-                    datasets: [{
-                        data: threadStats[0].status.totals,
-                        backgroundColor: chartColors,
-                        borderWidth: 0
-                    }]
-                },
-                options: chartOptions
-            });
-        });
-    });
-</script>
-<div class="charts--thread-status charts--breakdown">
-    <h2>southern pern</h2>
-    <canvas id="sp"></canvas>
-</div>
-<script>
-    fetch(`https://opensheet.elk.sh/${sheetID}/Threads`)
-    .then((response) => response.json())
-    .then((threadData) => {
-        fetch(`https://opensheet.elk.sh/${sheetID}/Sites`)
-        .then((response) => response.json())
-        .then((siteData) => {
-            //set overall variables
-            let siteName = 'southern pern';
-            let siteObject = siteName !== 'all' ? siteData.filter(item => item.Site === siteName) : siteData;
-            let threadStats = createThreadStats(threadData, siteObject);
-
-            /*Thread Status*/
-            new Chart(document.getElementById('cop'), {
                 type: 'pie',
                 data: {
                     labels: threadStats[0].status.tags.map(item => item.toUpperCase()),
